@@ -36,5 +36,44 @@ namespace WebApplication2.Controllers
 
             return View();
         }
+
+        [HttpGet]
+
+        public async Task<IActionResult> list()
+        {
+            var students = await dbContext.students.ToListAsync();
+
+            return View(students);
+        }
+
+        [HttpGet]
+        
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var student = await dbContext.students.FindAsync(id);
+
+            return View(student);
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Edit(Student viewModel)
+        {
+            var student = await dbContext.students.FindAsync(viewModel.ID);
+
+            if(student != null)
+            {
+                student.Name = viewModel.Name;  
+                student.Email = viewModel.Email;    
+                student.Phone = viewModel.Phone;    
+                student.subscribed = viewModel.subscribed;
+
+                await dbContext.SaveChangesAsync();
+
+            }
+            return RedirectToAction("list", "Students");
+        }
+
+
     }
 }
