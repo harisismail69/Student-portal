@@ -74,6 +74,18 @@ namespace WebApplication2.Controllers
             return RedirectToAction("list", "Students");
         }
 
+        [HttpPost]
 
+        public async Task<IActionResult> Delete(Student viewModel)
+        {
+            var student = await dbContext.students.AsNoTracking().FirstOrDefaultAsync(x => x.ID == viewModel.ID);
+            if(student != null)
+            {
+                dbContext.students.Remove(viewModel);
+                await dbContext.SaveChangesAsync(); 
+
+            }
+            return RedirectToAction("list", "Students");
+        }
     }
 }
