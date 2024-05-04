@@ -4,24 +4,34 @@
 @{
 }
 
+@model WebApplication2.Models.AddStudentViewModel
+
 <h1>Add Student </h1>
+
+<form method="post">
 
 <div class = "mt-3" > 
     <label class="form-lable">Name</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" asp-for="Name"/>
 </div>
 
 <div class="mt-3">
     <label class="form-lable">Email</label>
-    <input type="email" class="form-control" />
+    <input type="email" class="form-control" asp-for="Email" />
 </div>
 
 <div class="mt-3">
     <label class="form-lable">Phone</label>
-    <input type="number" class="form-control" />
+    <input type="number" class="form-control" asp-for="Phone" />
 </div>
 
 <div class="mt-3">
-    <input type="checkbox" class="form-check-input" id="Subscribed" />
+    <input type="checkbox" class="form-check-input" id="Subscribed" asp-for="subscribed" />
     <label class="form-checked-lable" for="Subcribed">Subscribed</label>
 </div>
+
+<div class ="mt-3">
+    <button type="submit" class="btn btn-primary">save</button>
+</div>
+
+</form>
